@@ -116,14 +116,7 @@ export default class ChatContainer extends Component {
 		const { chats, activeChat } = this.state
 		return (
 			<div className="container">
-				<SideBar
-					logout={logout}
-					chats={chats}
-					user={user}
-					activeChat={activeChat}
-					setActiveChat={this.setActiveChat}
-					onSendPrivateMessage={this.sendOpenPrivateMessage}
-					/>
+	
 				<div className="chat-room-container">
 					{
 						activeChat !== null ? (

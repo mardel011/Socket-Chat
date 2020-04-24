@@ -56,16 +56,16 @@ input,textarea {
   width: 100%
 }
 
-#side-bar {
+/*#side-bar {
   box-sizing: border-box;
   width: 33.75%;
   height: 100%;
   display: flex;
   justify-content: space-around;
   flex-direction: column
-}
+}*/
 
-#side-bar .heading {
+/*#side-bar .heading {
   box-sizing: border-box;
   height: 12vh;
   max-height: 65px;
@@ -215,8 +215,9 @@ input,textarea {
   display: flex;
   justify-content: center;
   font-size: 2em;
-}
+}*/
 
+/*
 .chat-header {
   background: #5d5d8a;
   box-shadow: 0px 6px 5px -2px rgba(225,225,225,0.7);
@@ -227,7 +228,7 @@ input,textarea {
   height: 12vh;
   max-height: 65px;
   padding: 18px 16px;
-}
+}*/
 
 .chat-header .user-info {
   align-items: center;
@@ -258,7 +259,7 @@ input,textarea {
 
 .chat-room-container {
   height: 100%;
-  width: 76.25%;
+  width: 100%;
 }
 
 @media screen and (max-width:  510px) {
@@ -342,11 +343,11 @@ input,textarea {
 }
 
 .message-container .message {
-  background: #fff;
+  background: #8e8e93;
   border-radius: 5px;
   border-top-left-radius: 0;
   box-sizing: border-box;
-  color: #b3b2ca;
+  color: #fff;
   height: 100%;
   padding: 10px 15px;
   position: relative;
@@ -364,9 +365,9 @@ input,textarea {
 .message-container .message::before {
   border-bottom-color: transparent;
   border-left-color: transparent;
-  border-right-color: #fff;
+  border-right-color: #8e8e93;
   border-style: solid;
-  border-top-color: #fff;
+  border-top-color: #8e8e93;
   border-width: 4px;
   content: '';
   height: 0;
@@ -396,15 +397,15 @@ input,textarea {
 }
 
 .message-container.right .message {
-  background: #89a1fc;
+  background: #5fc9f8;
   color: #fff;
   border-top-right-radius: 0;
   border-top-left-radius: 5px;
 }
 
 .message-container.right .message::before {
-  border-top-color: #89a1fc;
-  border-left-color: #89a1fc;
+  border-top-color: #5fc9f8;
+  border-left-color: #5fc9f8;
   border-right-color: transparent;
   left: auto;
   right: -7px;
@@ -473,5 +474,5 @@ input,textarea {
 
 .message-input .message-form .send:disabled {
   opacity: .2;
-  background: #5d5d8a;
+  background: black /* #5d5d8a*/;
 }

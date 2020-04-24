@@ -1,3 +1,4 @@
+
 const io = require('./index.js').io
 
 const { VERIFY_USER, USER_CONNECTED, USER_DISCONNECTED,
@@ -5,6 +6,9 @@ const { VERIFY_USER, USER_CONNECTED, USER_DISCONNECTED,
 		TYPING, PRIVATE_MESSAGE  } = require('../Events')
 
 const { createUser, createMessage, createChat } = require('../Factories')
+
+const chatHistory = require('./models/ChatHistory');
+const eventHistory = require('./models/EventHistory');
 
 let connectedUsers = { }
 
@@ -38,6 +42,19 @@ module.exports = function(socket){
 		io.emit(USER_CONNECTED, connectedUsers)
 		console.log(connectedUsers);
 
+		var connectionHistory = new eventHistory({
+			eventType : "Connected to Default Room",
+			username: socket.user.name,
+			date: Date()
+		})
+
+		connectionHistory.save((error, connectionHistory) => {
+			if(error) console.log(`Error occured on connectionHistory.save(): ${error}`)
+			else {
+				console.log(`connectionHistory saved: ${connectionHistory}`)
+			}
+		})
+
 	})
 
 	//User disconnects
@@ -48,6 +65,22 @@ module.exports = function(socket){
 			io.emit(USER_DISCONNECTED, connectedUsers)
 			console.log("Disconnect", connectedUsers);
 		}
+
+		var connectionHistory = new eventHistory({
+			eventType : "Disconnection from Default Room",
+			username: socket.user.name,
+			//username: socket.id,
+			date: Date()
+		})
+
+		connectionHistory.save((error, connectionHistory) => {
+			if(error) console.log(`Error occured on connectionHistory.save(): ${error}`)
+			else {
+				console.log(`connectionHistory saved: ${connectionHistory}`)
+			}
+		})
+
+		
 	})
 
 
@@ -56,6 +89,19 @@ module.exports = function(socket){
 		connectedUsers = removeUser(connectedUsers, socket.user.name)
 		io.emit(USER_DISCONNECTED, connectedUsers)
 		console.log("Disconnect", connectedUsers);
+
+		var connectionHistory = new eventHistory({
+			eventType : "Logout from Default Room",
+			username: socket.user.name,
+			date: Date()
+		})
+
+		connectionHistory.save((error, connectionHistory) => {
+			if(error) console.log(`Error occured on connectionHistory.save(): ${error}`)
+			else {
+				console.log(`connectionHistory saved: ${connectionHistory}`)
+			}
+		})
 
 	})
 
@@ -66,6 +112,20 @@ module.exports = function(socket){
 
 	socket.on(MESSAGE_SENT, ({chatId, message})=>{
 		sendMessageToChatFromUser(chatId, message)
+
+		var messageHistory = new chatHistory({
+			username: socket.user.name,
+			message: message,
+			date: Date()
+		  })
+		 
+		messageHistory.save((error, chatHistory) => {
+		 if (error) console.log(`Error Occured on messageHistory.save(): ${error}`)
+		 else {
+		   console.log(`messageHistory messages saved: ${chatHistory}`);
+		 }
+		 })
+
 	})
 
 	socket.on(TYPING, ({chatId, isTyping})=>{
@@ -118,3 +178,4 @@ function removeUser(userList, username){
 function isUser(userList, username){
   	return username in userList
 }
+

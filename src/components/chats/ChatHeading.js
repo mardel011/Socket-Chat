@@ -14,11 +14,7 @@ export default function({name, numberOfUsers}) {
 					<span>{numberOfUsers ? numberOfUsers : null}</span>
 				</div>
 			</div>
-			<div className="options">
-				<FAVideo />
-				<FAUserPlus />
-				<MdEllipsisMenu />
-			</div>
+			
 		</div>
 	);
 	

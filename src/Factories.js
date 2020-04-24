@@ -21,7 +21,7 @@ const createMessage = ({message = "", sender = ""} = { })=>(
 	)
 
 // Creates a Chat object
-const createChat = ({messages = [], name = "Community", users = []} = {})=>(
+const createChat = ({messages = [], name = users = []} = {})=>(
 	{
 		id:uuidv4(),
 		name,
